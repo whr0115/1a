@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>恋爱纪念日 - 员有辰 & 赵桐萱</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #5a3e6b;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 心形背景 */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            top: -20px;
+            color: rgba(255, 105, 180, 0.7);
+            font-size: 20px;
+            animation: fall 10s linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            width: 100%;
+            padding: 15px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(149, 64, 141, 0.3);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            width: 100%;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            margin-bottom: 1.5rem;
+            color: #d14d72;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+            line-height: 1.3;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            border-radius: 3px;
+        }
+        
+        .couple-names {
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            margin: 1.5rem 0;
+            color: #9a4d7e;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .anniversary-date {
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            margin: 1.5rem 0;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+        
+        .days-counter {
+            font-size: clamp(3.5rem, 15vw, 5rem);
+            font-weight: 800;
+            margin: 2rem 0;
+            color: #d14d72;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+            line-height: 1;
+        }
+        
+        .days-counter::after {
+            content: '天';
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            position: absolute;
+            bottom: 10px;
+            right: -40px;
+        }
+        
+        .message {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            line-height: 1.7;
+            margin: 2rem 0;
+            padding: 0 10px;
+            color: #5a3e6b;
+        }
+        
+        .quote-container {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            position: relative;
+            border-left: 4px solid #ff9a9e;
+            width: 100%;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: clamp(1rem, 4vw, 1.1rem);
+            color: #7a5a8a;
+            line-height: 1.6;
+        }
+        
+        .author {
+            text-align: right;
+            margin-top: 1rem;
+            color: #d14d72;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
+        }
+        
+        .hearts-icon {
+            color: #ff6b9d;
+            margin: 0 5px;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            font-size: clamp(0.9rem, 3.5vw, 1rem);
+            color: #7a5a8a;
+            line-height: 1.5;
+        }
+        
+        /* 触摸按钮效果 */
+        .card:active {
+            transform: scale(0.98);
+            transition: transform 0.1s;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 1.5rem 1rem;
+                border-radius: 15px;
+            }
+            
+            .days-counter::after {
+                right: -30px;
+            }
+            
+            .quote-container {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .card {
+                padding: 1rem 0.8rem;
+            }
+            
+            .days-counter::after {
+                right: -25px;
+                bottom: 5px;
+            }
+        }
+        
+        /* 防止文本溢出 */
+        .text-overflow-prevention {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* 优化动画性能 */
+        .heart {
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body>
+    <!-- 飘落的心形 -->
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <div class="card">
+            <h1><i class="fas fa-heart hearts-icon"></i> 恋爱纪念日 <i class="fas fa-heart hearts-icon"></i></h1>
+            
+            <div class="couple-names">员有辰 & 赵桐萱</div>
+            
+            <div class="anniversary-date">
+                <i class="far fa-calendar-alt"></i> 从 2025年10月25日 开始
+            </div>
+            
+            <div class="days-counter" id="days-counter">0</div>
+            
+            <div class="message">
+                从这一天起，我们的故事开始了。每一天都因你而美好，每一刻都值得珍藏。
+            </div>
+            
+            <div class="quote-container">
+                <p class="quote" id="quote">爱不是彼此凝视，而是一起注视同一个方向。</p>
+                <p class="author" id="author">—— 安东尼·德·圣-埃克苏佩里</p>
+            </div>
+            
+            <div class="footer">
+                <p>每一天都是你们爱情的新篇章 ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 移动端优化：减少心形数量提高性能
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            const isMobile = window.innerWidth <= 768;
+            const heartCount = isMobile ? 20 : 40;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.classList.add('heart');
+                
+                // 随机位置
+                heart.style.left = Math.random() * 100 + 'vw';
+                
+                // 随机动画延迟和持续时间
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                
+                // 随机大小（移动端更小）
+                const size = isMobile ? (Math.random() * 10 + 8) : (Math.random() * 20 + 10);
+                heart.style.fontSize = size + 'px';
+                
+                // 随机透明度
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // 计算恋爱天数
+        function calculateLoveDays() {
+            const startDate = new Date('2025-10-25');
+            const today = new Date();
+            
+            // 计算时间差（毫秒）
+            const diffTime = today - startDate;
+            
+            // 转换为天数
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('days-counter').textContent = Math.abs(diffDays);
+        }
+        
+        // 浪漫语录
+        const loveQuotes = [
+            {
+                quote: "爱不是彼此凝视，而是一起注视同一个方向。",
+                author: "安东尼·德·圣-埃克苏佩里"
+            },
+            {
+                quote: "最好的爱情，是让你不断完善自身，却不用丢了自己。",
+                author: "夏洛蒂·勃朗特"
+            },
+            {
+                quote: "在爱情里，最幸福的不是相遇，而是久别重逢。",
+                author: "佚名"
+            },
+            {
+                quote: "我爱你，不是因为你是一个怎样的人，而是因为我喜欢与你在一起时的感觉。",
+                author: "佚名"
+            },
+            {
+                quote: "爱情不是寻找共同点，而是学会尊重不同点。",
+                author: "佚名"
+            },
+            {
+                quote: "真正的爱情，是在能爱的时候，懂得珍惜。",
+                author: "佚名"
+            },
+            {
+                quote: "爱是两个人共同成长的过程，最好的爱情是让双方都变成更好的人。",
+                author: "佚名"
+            }
+        ];
+        
+        // 显示随机语录
+        function showRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * loveQuotes.length);
+            const quote = loveQuotes[randomIndex];
+            
+            document.getElementById('quote').textContent = quote.quote;
+            document.getElementById('author').textContent = "—— " + quote.author;
+        }
+        
+        // 触摸事件处理
+        function handleTouchEvents() {
+            const card = document.querySelector('.card');
+            
+            // 添加触摸反馈
+            card.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            card.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        }
+        
+        // 防止缩放
+        function preventZoom() {
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchmove', function(e) {
+                if(e.scale !== 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        }
+        
+        // 初始化页面
+        window.onload = function() {
+            createHearts();
+            calculateLoveDays();
+            showRandomQuote();
+            handleTouchEvents();
+            preventZoom();
+            
+            // 每30秒更换一次语录
+            setInterval(showRandomQuote, 30000);
+            
+            // 窗口大小变化时重新创建心形（适配横竖屏切换）
+            window.addEventListener('resize', function() {
+                const heartsContainer = document.getElementById('hearts');
+                heartsContainer.innerHTML = '';
+                createHearts();
+            });
+        };
+        
+        // 优化滚动性能
+        window.addEventListener('scroll', function() {
+            // 使用requestAnimationFrame优化滚动性能
+            requestAnimationFrame(function() {
+                // 滚动时不需要特别处理
+            });
+        });
+    </script>
+</body>
+</html>
